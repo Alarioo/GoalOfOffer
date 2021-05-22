@@ -29,10 +29,8 @@ class Solution2 {
             head=head.next;
         }
         int[] ret=new int[s.size()];
-        int i=0;
-        while(s.size()!=0){
+        for(int i=0;s.size()!=0;i++){
             ret[i]=s.pop();
-            i++;
         }
         return ret;
     }
@@ -40,15 +38,16 @@ class Solution2 {
 //反向遍历
 class Solution3 {
     public int[] reversePrint(ListNode head) {
-        ArrayList<Integer> ret = new ArrayList<>();
         ListNode node=head;
-        if (node!= null) {
-            ret.addAll(Integer.valueOf(reversePrint(node.next)));
-            ret.add(node.val);
+        int count=0;
+        while(node!=null){
+            count++;
+            node=node.next;
         }
-        int[] back=new int[ret.size()];
-        for (Integer i:ret){
-            back[i]=ret.get(i);
+        int[] back=new int[count];
+        for(int i=count-1;i>=0;i--){
+            back[i]=head.val;
+            head=head.next;
         }
         return back;
     }
