@@ -9,7 +9,7 @@ class ListNode {
       ListNode next;
       ListNode(int x) { val = x; }
   }
-class Solution1{
+class Solution{
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {   //返回值可变容易处理
         ArrayList<Integer> ret = new ArrayList<>();
         if (listNode != null) {
@@ -21,11 +21,10 @@ class Solution1{
 
 
 //stack
-class Solution2 {
     public int[] reversePrint(ListNode head) {
         Stack<Integer> s=new Stack<>();
         while(head!=null){
-            s.add(head.val);
+            s.push(head.val);
             head=head.next;
         }
         int[] ret=new int[s.size()];
@@ -34,10 +33,9 @@ class Solution2 {
         }
         return ret;
     }
-}
-//反向遍历
-class Solution3 {
-    public int[] reversePrint(ListNode head) {
+
+//反向遍历  会破坏链表结构
+    public int[] reversePrint2(ListNode head) {
         ListNode node=head;
         int count=0;
         while(node!=null){
@@ -51,24 +49,24 @@ class Solution3 {
         }
         return back;
     }
-}
-//头插入
-class Solution4 {
-    public int[] reversePrint(ListNode head) {
-        ListNode origin=new ListNode(0);
-        ListNode temp=head;
-        int count=0;
-        while(head!=null){
-            temp=head.next;
-            head.next=origin.next;
-            origin.next=head;
-            head=temp;
+//头插入 不破坏原head 生成反向链表
+    public int[] reversePrint3(ListNode head) {
+        ListNode reversehead= new ListNode(0);
+        ListNode temp = head;       //指向原链表的辅助节点
+        ListNode next=null;
+        int count = 0;
+        while (temp != null) {
+            next=temp.next;
+            temp.next=reversehead.next;
+            reversehead.next=temp;
+            temp=next;
             count++;
         }
-        int[] ret=new int[count];
-        for(int i=0;i<count;i++){
-            ret[i]= head.val;
-            head=head.next;
+        reversehead=reversehead.next;
+        int[] ret = new int[count];
+        for (int i = 0; i < count; i++) {
+            ret[i] = reversehead.val;
+            reversehead = reversehead.next;
         }
         return ret;
     }
