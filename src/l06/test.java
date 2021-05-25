@@ -62,7 +62,7 @@ class Solution{
             temp=next;
             count++;
         }
-        reversehead=reversehead.next;
+        reversehead=reversehead.next;     //注意头节点是否存数据
         int[] ret = new int[count];
         for (int i = 0; i < count; i++) {
             ret[i] = reversehead.val;
